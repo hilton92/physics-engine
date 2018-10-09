@@ -26,6 +26,8 @@ add_library(${PROJECT_NAME} STATIC
 	physicsEngine.h
 	dynVector.cpp
 	dynVector.h
+	object3d.cpp
+	object3d.h
     	)
 
 set(TEST_NAME ${PROJECT_NAME}_UnitTest)

@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 #include "physicsEngine.h"
 #include "dynVector.h"
+#include "object3d.h"
 
 //Unit Tests for Vector class
 
@@ -44,19 +45,32 @@ TEST(oneVector, multiplyByScalar_returnsCorrectAnswer)
 
 TEST(defaultPhysics, givenUpdateTime_returnsDisplacement)
 {
-    PhysicsEngine engine;
-    engine.update(0.5);
-    EXPECT_DOUBLE_EQ(engine.displaceVec.x_value, 0);
-    EXPECT_DOUBLE_EQ(engine.displaceVec.y_value, 0);
-    EXPECT_DOUBLE_EQ(engine.displaceVec.z_value, -2.45);
+    Object3D object;
+    object.setAccel(0, 0, -9.8);
+    object.update(0.5);
+    EXPECT_DOUBLE_EQ(object.displaceVec.x_value, 0);
+    EXPECT_DOUBLE_EQ(object.displaceVec.y_value, 0);
+    EXPECT_DOUBLE_EQ(object.displaceVec.z_value, -2.45);
 }
 
-TEST(PhysicsWithDisplacement, givenUpdateTime_returnsCorrectDisplacement)
+TEST(physicsWithDisplacement, givenUpdateTime_returnsCorrectDisplacement)
+{
+    Object3D object;
+    object.setAccel(0, 0, -9.8);
+    object.setDisplace(1.2, 0.45, 0.6);
+    object.update(0.4);
+    EXPECT_DOUBLE_EQ(object.displaceVec.x_value, 1.2);
+    EXPECT_DOUBLE_EQ(object.displaceVec.y_value, 0.45);
+    EXPECT_DOUBLE_EQ(object.displaceVec.z_value, -0.968);
+}
+
+TEST(emptyEnvironment, addObject_returnsObject)
 {
     PhysicsEngine engine;
-    engine.setDisplace(1.2, 0.45, 0.6);
+    engine.addSphere();
+    engine.ObjList[0].setDisplace(1.2, 0.45, 0.6);
     engine.update(0.4);
-    EXPECT_DOUBLE_EQ(engine.displaceVec.x_value, 1.2);
-    EXPECT_DOUBLE_EQ(engine.displaceVec.y_value, 0.45);
-    EXPECT_DOUBLE_EQ(engine.displaceVec.z_value, -0.968);
+    EXPECT_DOUBLE_EQ(engine.ObjList[0].displaceVec.x_value, 1.2);
+    EXPECT_DOUBLE_EQ(engine.ObjList[0].displaceVec.y_value, 0.45);
+    EXPECT_DOUBLE_EQ(engine.ObjList[0].displaceVec.z_value, -0.968);
 }

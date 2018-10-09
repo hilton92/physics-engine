@@ -2,27 +2,28 @@
 // Date: October 2018
 
 
-
-#include "dynVector.h"
-
 #ifndef PHYSICSENGINE_H_
 #define PHYSICSENGINE_H_
 
-class PhysicsEngine
+
+#include "dynVector.h"
+#include "object3d.h"
+#include <vector>
+
+
+class PhysicsEngine  
 {
 public:
     PhysicsEngine() :
-        gravityVec{0, 0, -9.8},
-        velocityVec{0, 0, 0},
-        displaceVec{0,0,0} {}
+        gravityVec{0, 0, -9.8}{}
     ~PhysicsEngine(){}
     dynVector gravityVec;
-    dynVector velocityVec;
-    dynVector displaceVec;
+    std::vector<Object3D> ObjList;
     void setGravity(double x_accel, double y_accel, double z_accel);
-    void setVelocity(double x_dot, double y_dot, double z_dot);
-    void setDisplace(double X, double Y, double Z);
+    void addSphere();
     void update(double s);
+    dynVector getGravityVec();
 };
+
 
 #endif
