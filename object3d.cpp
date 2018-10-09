@@ -38,26 +38,26 @@ void Object3D::collisionDetect()
     double limit = 5 - radius;
     if (displaceVec.x_value > limit)
     {
-        displaceVec.x_value = -displaceVec.x_value*coefOfRest;
+        velocityVec.x_value = -velocityVec.x_value*coefOfRest;
     }
     if (displaceVec.y_value > limit)
     {
-        displaceVec.y_value = -displaceVec.y_value*coefOfRest;
+        velocityVec.y_value = -velocityVec.y_value*coefOfRest;
     }
     if (displaceVec.z_value > limit)
     {
-        displaceVec.z_value = -displaceVec.z_value*coefOfRest;
+        velocityVec.z_value = -velocityVec.z_value*coefOfRest;
     }
     if (displaceVec.x_value < -limit)
     {
-        displaceVec.x_value = -displaceVec.x_value*coefOfRest;
+        velocityVec.x_value = -velocityVec.x_value*coefOfRest;
     }
     if (displaceVec.y_value < -limit)
     {
-        displaceVec.y_value = -displaceVec.y_value*coefOfRest;
+        velocityVec.y_value = -velocityVec.y_value*coefOfRest;
     }
     if (displaceVec.z_value < -limit)
     {
-        displaceVec.z_value = -displaceVec.z_value*coefOfRest;
+        velocityVec.z_value = -velocityVec.z_value*coefOfRest;
     }
 }
