@@ -9,6 +9,7 @@ void Object3D::update(double s)
 {
     velocityVec = velocityVec + (accelVec * s);
     displaceVec = displaceVec + (velocityVec * s);
+    collisionDetect();
 }
 
 void Object3D::setAccel(double x_accel, double y_accel, double z_accel)
@@ -37,26 +38,26 @@ void Object3D::collisionDetect()
     double limit = 5 - radius;
     if (displaceVec.x_value > limit)
     {
-        displaceVec.x_value = -displaceVec.x_value;
+        displaceVec.x_value = -displaceVec.x_value*coefOfRest;
     }
     if (displaceVec.y_value > limit)
     {
-        displaceVec.y_value = -displaceVec.x_value;
+        displaceVec.y_value = -displaceVec.y_value*coefOfRest;
     }
     if (displaceVec.z_value > limit)
     {
-        displaceVec.z_value = -displaceVec.x_value;
+        displaceVec.z_value = -displaceVec.z_value*coefOfRest;
     }
     if (displaceVec.x_value < -limit)
     {
-        displaceVec.x_value = -displaceVec.x_value;
+        displaceVec.x_value = -displaceVec.x_value*coefOfRest;
     }
     if (displaceVec.y_value < -limit)
     {
-        displaceVec.y_value = -displaceVec.x_value;
+        displaceVec.y_value = -displaceVec.y_value*coefOfRest;
     }
     if (displaceVec.z_value < -limit)
     {
-        displaceVec.z_value = -displaceVec.x_value;
+        displaceVec.z_value = -displaceVec.z_value*coefOfRest;
     }
 }
