@@ -9,61 +9,61 @@ void Object3D::update(double s)
 {
     velocityVec = velocityVec + (accelVec * s);
     displaceVec = displaceVec + (velocityVec * s);
-    collisionDetect();
+    collision_detect();
 }
 
-void Object3D::setAccel(double x_accel, double y_accel, double z_accel)
+void Object3D::set_accel(double xAccel, double yAccel, double zAccel)
 {
-    accelVec.x_value = x_accel;
-    accelVec.y_value = y_accel;
-    accelVec.z_value = z_accel;
+    accelVec.xValue = xAccel;
+    accelVec.yValue = yAccel;
+    accelVec.zValue = zAccel;
 }
 
-void Object3D::setVelocity(double x_dot, double y_dot, double z_dot)
+void Object3D::set_velocity(double xDot, double yDot, double zDot)
 {
-    velocityVec.x_value = x_dot;
-    velocityVec.y_value = y_dot;
-    velocityVec.z_value = z_dot;
+    velocityVec.xValue = xDot;
+    velocityVec.yValue = yDot;
+    velocityVec.zValue = zDot;
 }
 
-void Object3D::setDisplace(double X, double Y, double Z)
+void Object3D::set_displace(double X, double Y, double Z)
 {
-    displaceVec.x_value = X;
-    displaceVec.y_value = Y;
-    displaceVec.z_value = Z;
+    displaceVec.xValue = X;
+    displaceVec.yValue = Y;
+    displaceVec.zValue = Z;
 }
 
-void Object3D::collisionDetect()
+void Object3D::collision_detect()
 {
     double limit = 5 - radius;
-    if (displaceVec.x_value > limit)
+    if (displaceVec.xValue > limit)
     {
-        velocityVec.x_value = -velocityVec.x_value*coefOfRest;
-        displaceVec.x_value = limit;
+        velocityVec.xValue = -velocityVec.xValue*coefOfRest;
+        displaceVec.xValue = limit;
     }
-    if (displaceVec.y_value > limit)
+    if (displaceVec.yValue > limit)
     {
-        velocityVec.y_value = -velocityVec.y_value*coefOfRest;
-        displaceVec.y_value = limit;
+        velocityVec.yValue = -velocityVec.yValue*coefOfRest;
+        displaceVec.yValue = limit;
     }
-    if (displaceVec.z_value > limit)
+    if (displaceVec.zValue > limit)
     {
-        velocityVec.z_value = -velocityVec.z_value*coefOfRest;
-        displaceVec.z_value = limit;
+        velocityVec.zValue = -velocityVec.zValue*coefOfRest;
+        displaceVec.zValue = limit;
     }
-    if (displaceVec.x_value < -limit)
+    if (displaceVec.xValue < -limit)
     {
-        velocityVec.x_value = -velocityVec.x_value*coefOfRest;
-        displaceVec.x_value = -limit;
+        velocityVec.xValue = -velocityVec.xValue*coefOfRest;
+        displaceVec.xValue = -limit;
     }
-    if (displaceVec.y_value < -limit)
+    if (displaceVec.yValue < -limit)
     {
-        velocityVec.y_value = -velocityVec.y_value*coefOfRest;
-        displaceVec.y_value = -limit;
+        velocityVec.yValue = -velocityVec.yValue*coefOfRest;
+        displaceVec.yValue = -limit;
     }
-    if (displaceVec.z_value < -limit)
+    if (displaceVec.zValue < -limit)
     {
-        velocityVec.z_value = -velocityVec.z_value*coefOfRest;
-        displaceVec.z_value = -limit;
+        velocityVec.zValue = -velocityVec.zValue*coefOfRest;
+        displaceVec.zValue = -limit;
     }
 }

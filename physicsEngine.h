@@ -19,10 +19,10 @@ public:
     ~PhysicsEngine(){}
     dynVector gravityVec;
     std::vector<Object3D> ObjList;
-    void setGravity(double x_accel, double y_accel, double z_accel);
-    void addSphere();
+    void set_gravity(double xAccel, double yAccel, double zAccel);
+    void add_sphere();
     void update(double s);
-    dynVector getGravityVec();
+    dynVector get_gravity_vec();
 };
 
 

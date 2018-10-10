@@ -4,7 +4,6 @@
 #define OBJECT3D_H_
 
 #include "dynVector.h"
-#include <cmath>
 
 class Object3D
 {
@@ -19,11 +18,11 @@ public:
     dynVector displaceVec;
     double radius;
     double coefOfRest = 0.8;
-    void setVelocity(double x_dot, double y_dot, double z_dot);
-    void setDisplace(double X, double Y, double Z);
-    void setAccel(double x_accel, double y_accel, double z_accel);
+    void set_velocity(double xDot, double yDot, double zDot);
+    void set_displace(double X, double Y, double Z);
+    void set_accel(double xAccel, double yAccel, double zAccel);
     void update(double s);
-    void collisionDetect();
+    void collision_detect();
 };
 
 #endif

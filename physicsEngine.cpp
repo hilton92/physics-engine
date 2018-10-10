@@ -6,19 +6,19 @@
 #include <vector>
 
 
-void PhysicsEngine::setGravity(double x_accel, double y_accel, double z_accel)
+void PhysicsEngine::set_gravity(double xAccel, double yAccel, double zAccel)
 {
-    gravityVec.x_value = x_accel;
-    gravityVec.y_value = y_accel;
-    gravityVec.z_value = z_accel;
+    gravityVec.xValue = xAccel;
+    gravityVec.yValue = yAccel;
+    gravityVec.zValue = zAccel;
 }
 
-dynVector PhysicsEngine::getGravityVec()
+dynVector PhysicsEngine::get_gravity_vec()
 {
     return gravityVec;
 }
 
-void PhysicsEngine::addSphere()
+void PhysicsEngine::add_sphere()
 {
     Object3D object;
     object.accelVec = gravityVec;
