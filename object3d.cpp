@@ -8,7 +8,7 @@
 void Object3D::update(double s)
 {
     calculate_velocity_sign_vector();
-    dragForce = velocitySignVector * ((velocityVec * velocityVec) * 0.5 * fluidDensity * dragCoefficient * area);
+    //dragForce = velocitySignVector * ((velocityVec * velocityVec) * 0.5 * fluidDensity * dragCoefficient * area);
     accelVec = accelVec + (dragForce * (1/objectMass));
     velocityVec = velocityVec + (accelVec * s);
     displaceVec = displaceVec + (velocityVec * s);

@@ -11,7 +11,8 @@ public:
     Object3D() :
         accelVec{0,0,0},
         velocityVec{0,0,0},
-        displaceVec{0,0,0} {}
+        displaceVec{0,0,0},
+        dragForce{0,0,0}{}
     ~Object3D(){}
     dynVector accelVec;
     dynVector velocityVec;
