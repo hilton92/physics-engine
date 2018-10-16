@@ -7,9 +7,31 @@
 
 void Object3D::update(double s)
 {
+    dragForce = (velocityVec * velocityVec) * 0.5 * fluidDensity * dragCoefficient * area;
+    accelVec = accelVec + (dragForce * (1/objectMass));
     velocityVec = velocityVec + (accelVec * s);
     displaceVec = displaceVec + (velocityVec * s);
     collision_detect();
+}
+
+void Object3D::set_fluid_density(double density)
+{
+    fluidDensity = density;
+}
+
+void Object3D::set_mass(double mass)
+{
+    objectMass = mass;
+}
+void Object3D::set_radius(double radius)
+{
+    objectRadius = radius;
+    area = (radius * radius) * 3.14159;
+}
+
+void Object3D::set_coefficient_of_restitution(double coef)
+{
+    coefOfRest = coef;
 }
 
 void Object3D::set_accel(double xAccel, double yAccel, double zAccel)
@@ -35,7 +57,7 @@ void Object3D::set_displace(double X, double Y, double Z)
 
 void Object3D::collision_detect()
 {
-    double limit = 5 - radius;
+    double limit = 5 - objectRadius;
     if (displaceVec.xValue > limit)
     {
         velocityVec.xValue = -velocityVec.xValue*coefOfRest;

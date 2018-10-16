@@ -30,6 +30,16 @@ public:
         vec.zValue = zValue * scalar;
         return vec;
     }
+
+    dynVector operator * (dynVector const &obj)
+    {
+        dynVector vec;
+        vec.xValue = (xValue) * (obj.xValue);
+        vec.yValue = (yValue) * (obj.xValue);
+        vec.zValue = (zValue) * (obj.xValue);
+        return vec;
+    }
+
     void set_values(double X, double Y, double Z);
 };
 

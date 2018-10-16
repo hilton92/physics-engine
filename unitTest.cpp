@@ -67,8 +67,7 @@ TEST(physicsWithDisplacement, givenUpdateTime_returnsCorrectDisplacement)
 TEST(emptyEnvironment, addObject_returnsCorrectDisplacement)
 {
     PhysicsEngine engine;
-    engine.add_sphere();
-    engine.ObjList[0].set_displace(1.2, 0.45, 0.6);
+    engine.add_sphere(1, 1, 0.8, 1.2, 0.45, 0.6, 0, 0, 0);
     engine.update(0.4);
     EXPECT_DOUBLE_EQ(engine.ObjList[0].displaceVec.xValue, 1.2);
     EXPECT_DOUBLE_EQ(engine.ObjList[0].displaceVec.yValue, 0.45);

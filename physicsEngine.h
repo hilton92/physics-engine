@@ -15,12 +15,14 @@ class PhysicsEngine
 {
 public:
     PhysicsEngine() :
-        gravityVec{0, 0, -9.8}{}
+        gravityVec{0, 0, -9.8}, fluidDensity{1.275}{}
     ~PhysicsEngine(){}
     dynVector gravityVec;
+    double fluidDensity;
     std::vector<Object3D> ObjList;
     void set_gravity(double xAccel, double yAccel, double zAccel);
-    void add_sphere();
+    void set_fluid_density(double density);
+    void add_sphere(double radius, double mass, double coefficientOfRestitution, double xPos, double yPos, double zPos, double xVel, double yVel, double zVel);
     void update(double s);
     dynVector get_gravity_vec();
 };
