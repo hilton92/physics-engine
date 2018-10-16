@@ -7,7 +7,8 @@
 
 void Object3D::update(double s)
 {
-    dragForce = (velocityVec * velocityVec) * 0.5 * fluidDensity * dragCoefficient * area;
+    calculate_velocity_sign_vector();
+    dragForce = velocitySignVector * ((velocityVec * velocityVec) * 0.5 * fluidDensity * dragCoefficient * area);
     accelVec = accelVec + (dragForce * (1/objectMass));
     velocityVec = velocityVec + (accelVec * s);
     displaceVec = displaceVec + (velocityVec * s);
@@ -53,6 +54,16 @@ void Object3D::set_displace(double X, double Y, double Z)
     displaceVec.xValue = X;
     displaceVec.yValue = Y;
     displaceVec.zValue = Z;
+}
+
+void Object3D::calculate_velocity_sign_vector()
+{
+    if (velocityVec.xValue >=0) velocitySignVector.xValue = 1;
+    if (velocityVec.xValue <0) velocitySignVector.xValue = -1;
+    if (velocityVec.yValue >=0) velocitySignVector.yValue = 1;
+    if (velocityVec.yValue <0) velocitySignVector.yValue = -1;
+    if (velocityVec.zValue >=0) velocitySignVector.zValue = 1;
+    if (velocityVec.zValue <0) velocitySignVector.zValue = -1;
 }
 
 void Object3D::collision_detect()
