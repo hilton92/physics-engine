@@ -58,3 +58,8 @@ void PhysicsEngine::set_new_fluid_density()
         ObjList[i].fluidDensity = fluidDensity;
     }
 }
+
+void PhysicsEngine::clear()
+{
+    ObjList.clear();
+}

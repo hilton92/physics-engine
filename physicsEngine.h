@@ -27,6 +27,7 @@ public:
     void set_new_gravity();
     void set_new_fluid_density();
     dynVector get_gravity_vec();
+    void clear();
 };
 
 
