@@ -50,3 +50,11 @@ void PhysicsEngine::set_new_gravity()
         ObjList[i].gravityVec = gravityVec;
     }
 }
+
+void PhysicsEngine::set_new_fluid_density()
+{
+    for (unsigned int i = 0; i < ObjList.size(); i++)
+    {
+        ObjList[i].fluidDensity = fluidDensity;
+    }
+}
