@@ -74,4 +74,34 @@ TEST(emptyEnvironment, addObject_returnsCorrectDisplacement)
     EXPECT_DOUBLE_EQ(engine.ObjList[0].displaceVec.zValue, -0.968);
 }
 
+TEST(initialObject, setVelocity_returnsCorrectDrag)
+{
+    PhysicsEngine engine;
+    engine.add_sphere(1, 1, 0.8, 1.2, 0.45, 0.6, 1.6, 2.4, 1.1);
+    engine.update(0.4);
+    EXPECT_NEAR(engine.ObjList[0].dragForce.xValue, -2.5635, 0.001);
+    EXPECT_NEAR(engine.ObjList[0].dragForce.yValue, -5.7679, 0.001);
+    EXPECT_NEAR(engine.ObjList[0].dragForce.zValue, -1.2116, 0.001);
+}
+
+TEST(initialObject, setVelocityOneStep_returnsCorrectDisplacement)
+{
+    PhysicsEngine engine;
+    engine.add_sphere(1, 1, 0.8, 1.2, 0.45, 0.6, 1.6, 2.4, 1.1);
+    engine.update(0.4);
+    EXPECT_NEAR(engine.ObjList[0].displaceVec.xValue, 1.4298, 0.001);
+    EXPECT_NEAR(engine.ObjList[0].displaceVec.yValue, 0.48712, 0.001);
+    EXPECT_NEAR(engine.ObjList[0].displaceVec.zValue, -0.7218, 0.001);
+}
+
+TEST(initialObject, setVelocityOneStep_returnsCorrectDrag)
+{
+    PhysicsEngine engine;
+    engine.add_sphere(1, 1, 0.8, 1.2, 0.45, 0.6, 1.6, 2.4, 1.1);
+    engine.update(0.4);
+    engine.update(0.4);
+    EXPECT_NEAR(engine.ObjList[0].dragForce.xValue, -0.3306, 0.001);
+    EXPECT_NEAR(engine.ObjList[0].dragForce.yValue, -0.0086, 0.001);
+    EXPECT_NEAR(engine.ObjList[0].dragForce.zValue, 10.935, 0.001);
+}
 

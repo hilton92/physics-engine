@@ -13,20 +13,25 @@ public:
         velocityVec{0,0,0},
         displaceVec{0,0,0},
         dragForce{0,0,0},
+        objectRadius{1},
         coefOfRest{0.8},
-        dragCoefficient{0.5}{}
+        dragCoefficient{0.5},
+        area{3.1415927},
+        objectMass{1},
+        fluidDensity{1.275}{}
+
     ~Object3D(){}
     dynVector accelVec;
     dynVector velocityVec;
     dynVector displaceVec;
     dynVector dragForce;
     dynVector velocitySignVector;
-    double objectRadius = 1;
+    double objectRadius;
     double coefOfRest;
     double dragCoefficient;
-    double area = 0;
-    double objectMass = 1;
-    double fluidDensity = 0;
+    double area;
+    double objectMass;
+    double fluidDensity;
     void set_velocity(double xDot, double yDot, double zDot);
     void set_displace(double X, double Y, double Z);
     void set_accel(double xAccel, double yAccel, double zAccel);
