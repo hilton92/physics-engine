@@ -35,8 +35,8 @@ public:
     {
         dynVector vec;
         vec.xValue = (xValue) * (obj.xValue);
-        vec.yValue = (yValue) * (obj.xValue);
-        vec.zValue = (zValue) * (obj.xValue);
+        vec.yValue = (yValue) * (obj.yValue);
+        vec.zValue = (zValue) * (obj.zValue);
         return vec;
     }
 

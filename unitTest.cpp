@@ -73,3 +73,5 @@ TEST(emptyEnvironment, addObject_returnsCorrectDisplacement)
     EXPECT_DOUBLE_EQ(engine.ObjList[0].displaceVec.yValue, 0.45);
     EXPECT_DOUBLE_EQ(engine.ObjList[0].displaceVec.zValue, -0.968);
 }
+
+
