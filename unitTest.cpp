@@ -46,7 +46,7 @@ TEST(oneVector, multiplyByScalar_returnsCorrectAnswer)
 TEST(defaultPhysics, givenUpdateTime_returnsDisplacement)
 {
     Object3D object;
-    object.set_accel(0, 0, -9.8);
+    object.set_gravity(0, 0, -9.8);
     object.update(0.5);
     EXPECT_DOUBLE_EQ(object.displaceVec.xValue, 0);
     EXPECT_DOUBLE_EQ(object.displaceVec.yValue, 0);
@@ -56,7 +56,7 @@ TEST(defaultPhysics, givenUpdateTime_returnsDisplacement)
 TEST(physicsWithDisplacement, givenUpdateTime_returnsCorrectDisplacement)
 {
     Object3D object;
-    object.set_accel(0, 0, -9.8);
+    object.set_gravity(0, 0, -9.8);
     object.set_displace(1.2, 0.45, 0.6);
     object.update(0.4);
     EXPECT_DOUBLE_EQ(object.displaceVec.xValue, 1.2);

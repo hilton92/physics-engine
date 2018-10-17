@@ -13,6 +13,7 @@ public:
         velocityVec{0,0,0},
         displaceVec{0,0,0},
         dragForce{0,0,0},
+        gravityVec{0,0,0},
         objectRadius{1},
         coefOfRest{0.8},
         dragCoefficient{0.5},
@@ -26,6 +27,7 @@ public:
     dynVector displaceVec;
     dynVector dragForce;
     dynVector velocitySignVector;
+    dynVector gravityVec;
     double objectRadius;
     double coefOfRest;
     double dragCoefficient;
@@ -35,6 +37,7 @@ public:
     void set_velocity(double xDot, double yDot, double zDot);
     void set_displace(double X, double Y, double Z);
     void set_accel(double xAccel, double yAccel, double zAccel);
+    void set_gravity(double xAccel, double yAccel, double zAccel);
     void set_fluid_density(double density);
     void set_mass(double mass);
     void set_radius(double radius);
