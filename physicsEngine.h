@@ -24,6 +24,7 @@ public:
     void set_fluid_density(double density);
     void add_sphere(double radius, double mass, double coefficientOfRestitution, double xPos, double yPos, double zPos, double xVel, double yVel, double zVel);
     void update(double s);
+    void set_new_gravity();
     dynVector get_gravity_vec();
 };
 

@@ -42,3 +42,11 @@ void PhysicsEngine::update(double s)
         ObjList[i].update(s);
     }
 }
+
+void PhysicsEngine::set_new_gravity()
+{
+    for (unsigned int i = 0; i < ObjList.size(); i++)
+    {
+        ObjList[i].gravityVec = gravityVec;
+    }
+}
