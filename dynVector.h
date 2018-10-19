@@ -3,6 +3,7 @@
 #ifndef DYNVECTOR_H_
 #define DYNVECTOR_H_
 
+#include <cmath>
 
 class dynVector
 {
@@ -19,6 +20,15 @@ public:
         vec.xValue = (xValue) + (obj.xValue);
         vec.yValue = (yValue) + (obj.yValue);
         vec.zValue = (zValue) + (obj.zValue);
+        return vec;
+    }
+
+    dynVector operator - (dynVector const &obj)
+    {
+        dynVector vec;
+        vec.xValue = (xValue) - (obj.xValue);
+        vec.yValue = (yValue) - (obj.yValue);
+        vec.zValue = (zValue) - (obj.zValue);
         return vec;
     }
 
@@ -40,8 +50,29 @@ public:
         return vec;
     }
 
+    dynVector operator / (double scalar)
+    {
+        dynVector vec;
+        vec.xValue = scalar / (this->xValue);
+        vec.yValue = scalar / (this->yValue);
+        vec.zValue = scalar / (this->zValue);
+        return vec;
+    }
+
+    double operator || (dynVector const &obj)
+    {
+        double dotProduct{0};
+        dotProduct = (this->xValue * obj.xValue) + (this->yValue * obj.yValue) + (this->zValue * obj.zValue);
+        return dotProduct;
+    }
+
     void set_values(double X, double Y, double Z);
 };
+
+double norm_2(dynVector input)
+{
+    return sqrt((input.xValue*input.xValue) + (input.yValue*input.yValue) + (input.zValue*input.zValue));
+}
 
 
 #endif

@@ -4,6 +4,7 @@
 #include "physicsEngine.h"
 #include "object3d.h"
 #include <vector>
+#include <cmath>
 
 
 void PhysicsEngine::set_gravity(double xAccel, double yAccel, double zAccel)
@@ -62,4 +63,46 @@ void PhysicsEngine::set_new_fluid_density()
 void PhysicsEngine::clear()
 {
     ObjList.clear();
+}
+
+void PhysicsEngine::collision_check(unsigned int index)
+{
+    unsigned long int size = ObjList.size();
+    for (unsigned int i = 0; i < size; i++)
+    {
+        if (i != index)
+        {
+            if (determine_if_collision_occurred(index, i))
+            {
+                collision_occurred(index, i);
+            }
+        }
+    }
+}
+
+bool PhysicsEngine::determine_if_collision_occurred(unsigned int sphereIndex1, unsigned int sphereIndex2)
+{
+    double radiusSum = ObjList[sphereIndex1].objectRadius + ObjList[sphereIndex2].objectRadius;
+    double xDifference = std::abs(ObjList[sphereIndex1].displaceVec.xValue - ObjList[sphereIndex2].displaceVec.xValue);
+    if (radiusSum < xDifference) return false;
+    double yDifference = std::abs(ObjList[sphereIndex1].displaceVec.yValue - ObjList[sphereIndex2].displaceVec.yValue);
+    if (radiusSum < yDifference) return false;
+    double zDifference = std::abs(ObjList[sphereIndex1].displaceVec.zValue - ObjList[sphereIndex2].displaceVec.zValue);
+    if (radiusSum < zDifference) return false;
+    double distance = sqrt((xDifference*xDifference) + (yDifference*yDifference) + (zDifference*zDifference));
+    if (radiusSum < distance) return false;
+    else return true;
+}
+
+void PhysicsEngine::collision_occurred(unsigned int s1, unsigned int s2)
+{
+    dynVector v1 = ObjList[s1].velocityVec;
+    dynVector v2 = ObjList[s1].velocityVec;
+    double massProduct1 = (-2 * ObjList[s2].objectMass) / (ObjList[s1].objectMass + ObjList[s2].objectMass);
+    double massProduct2 = (-2 * ObjList[s1].objectMass) / (ObjList[s1].objectMass + ObjList[s2].objectMass);
+    double dotProduct1 = ((v1 - v2) || (ObjList[s1].displaceVec - ObjList[s2].displaceVec));
+    double dotProduct2 = ((ObjList[s2].velocityVec - ObjList[s1].velocityVec) || (ObjList[s2].displaceVec - ObjList[s1].displaceVec));
+    double norm = norm_2(ObjList[s1].displaceVec - ObjList[s2].displaceVec);
+    ObjList[s1].velocityVec = ((ObjList[s1].displaceVec - ObjList[s2].displaceVec) * massProduct1 * (dotProduct1) * (1/norm) + v1) * ObjList[s1].coefOfRest;
+    ObjList[s2].velocityVec = ((ObjList[s2].displaceVec - ObjList[s1].displaceVec) * massProduct2 * (dotProduct2) * (1/norm) + v2) * ObjList[s2].coefOfRest;
 }

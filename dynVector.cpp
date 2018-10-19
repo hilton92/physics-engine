@@ -27,3 +27,5 @@ void dynVector::set_values(double X, double Y, double Z)
     yValue = static_cast<double>(Y);
     zValue = static_cast<double>(Z);
 }
+
+

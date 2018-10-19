@@ -28,6 +28,9 @@ public:
     void set_new_fluid_density();
     dynVector get_gravity_vec();
     void clear();
+    void collision_check(unsigned int index);
+    bool determine_if_collision_occurred(unsigned int sphereIndex1, unsigned int sphereIndex2);
+    void collision_occurred(unsigned int sphereIndex1, unsigned int sphereIndex2);
 };
 
 

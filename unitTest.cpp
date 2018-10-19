@@ -105,3 +105,13 @@ TEST(initialObject, setVelocityOneStep_returnsCorrectDrag)
     EXPECT_NEAR(engine.ObjList[0].dragForce.zValue, 10.935, 0.001);
 }
 
+TEST(twoVectors, calculateDotProduct_returnsDotProduct)
+{
+    dynVector Vec1;
+    dynVector Vec2;
+    Vec1.set_values(2.4, 3.0, 2.0);
+    Vec2.set_values(1.0, 2.0, 3.1);
+    double dotProduct = Vec1 || Vec2;
+    EXPECT_DOUBLE_EQ(dotProduct, 14.6);
+}
+
