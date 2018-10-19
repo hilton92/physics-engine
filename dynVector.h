@@ -69,10 +69,6 @@ public:
     void set_values(double X, double Y, double Z);
 };
 
-double norm_2(dynVector input)
-{
-    return sqrt((input.xValue*input.xValue) + (input.yValue*input.yValue) + (input.zValue*input.zValue));
-}
-
+double norm_2(dynVector input);
 
 #endif

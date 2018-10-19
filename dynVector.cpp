@@ -28,4 +28,7 @@ void dynVector::set_values(double X, double Y, double Z)
     zValue = static_cast<double>(Z);
 }
 
-
+double norm_2(dynVector input)
+{
+    return sqrt((input.xValue*input.xValue) + (input.yValue*input.yValue) + (input.zValue*input.zValue));
+}

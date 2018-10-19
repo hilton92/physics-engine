@@ -3,6 +3,7 @@
 
 #include "physicsEngine.h"
 #include "object3d.h"
+#include "dynVector.h"
 #include <vector>
 #include <cmath>
 
