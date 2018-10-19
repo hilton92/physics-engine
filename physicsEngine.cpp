@@ -42,6 +42,7 @@ void PhysicsEngine::update(double s)
     for (unsigned int i = 0; i < ObjList.size(); i++)
     {
         ObjList[i].update(s);
+        collision_check(i);
     }
 }
 
