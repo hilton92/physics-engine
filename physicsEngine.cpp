@@ -115,11 +115,11 @@ bool PhysicsEngine::check_if_proposed_sphere_interferes(double radius, double xP
 void PhysicsEngine::collision_occurred(unsigned int s1, unsigned int s2)
 {
     dynVector v1 = ObjList[s1].velocityVec;
-    dynVector v2 = ObjList[s1].velocityVec;
+    dynVector v2 = ObjList[s2].velocityVec;
     double massProduct1 = (-2 * ObjList[s2].objectMass) / (ObjList[s1].objectMass + ObjList[s2].objectMass);
     double massProduct2 = (-2 * ObjList[s1].objectMass) / (ObjList[s1].objectMass + ObjList[s2].objectMass);
     double dotProduct1 = ((v1 - v2) || (ObjList[s1].displaceVec - ObjList[s2].displaceVec));
-    double dotProduct2 = ((ObjList[s2].velocityVec - ObjList[s1].velocityVec) || (ObjList[s2].displaceVec - ObjList[s1].displaceVec));
+    double dotProduct2 = ((v2 - v1) || (ObjList[s2].displaceVec - ObjList[s1].displaceVec));
     double norm = norm_mag(ObjList[s1].displaceVec - ObjList[s2].displaceVec);
     ObjList[s1].velocityVec = ((ObjList[s1].displaceVec - ObjList[s2].displaceVec) * massProduct1 * (dotProduct1) * (1/norm) + v1) * ObjList[s1].coefOfRest;
     ObjList[s2].velocityVec = ((ObjList[s2].displaceVec - ObjList[s1].displaceVec) * massProduct2 * (dotProduct2) * (1/norm) + v2) * ObjList[s2].coefOfRest;
