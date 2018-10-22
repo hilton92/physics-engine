@@ -69,6 +69,6 @@ public:
     void set_values(double X, double Y, double Z);
 };
 
-double norm_2(dynVector input);
+double norm_mag(dynVector input);
 
 #endif

@@ -32,6 +32,7 @@ public:
     bool determine_if_collision_occurred(unsigned int sphereIndex1, unsigned int sphereIndex2);
     void collision_occurred(unsigned int sphereIndex1, unsigned int sphereIndex2);
     void move_to_avoid_intersection(unsigned int sphereIndex1, unsigned int sphereIndex2);
+    bool check_if_proposed_sphere_interferes(double radius, double xPos, double yPos, double zPos, unsigned int sp);
 };
 
 #endif
