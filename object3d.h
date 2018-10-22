@@ -28,6 +28,7 @@ public:
     dynVector dragForce;
     dynVector velocitySignVector;
     dynVector gravityVec;
+    dynVector previousDisplace;
     double objectRadius;
     double coefOfRest;
     double dragCoefficient;

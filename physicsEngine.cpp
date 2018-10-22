@@ -107,4 +107,11 @@ void PhysicsEngine::collision_occurred(unsigned int s1, unsigned int s2)
     double norm = norm_2(ObjList[s1].displaceVec - ObjList[s2].displaceVec);
     ObjList[s1].velocityVec = ((ObjList[s1].displaceVec - ObjList[s2].displaceVec) * massProduct1 * (dotProduct1) * (1/norm) + v1) * ObjList[s1].coefOfRest;
     ObjList[s2].velocityVec = ((ObjList[s2].displaceVec - ObjList[s1].displaceVec) * massProduct2 * (dotProduct2) * (1/norm) + v2) * ObjList[s2].coefOfRest;
+    move_to_avoid_intersection(s1, s2);
+}
+
+void PhysicsEngine::move_to_avoid_intersection(unsigned int s1, unsigned int s2)
+{
+    ObjList[s1].displaceVec = ObjList[s1].previousDisplace;
+    ObjList[s2].displaceVec = ObjList[s2].previousDisplace;
 }
