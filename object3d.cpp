@@ -87,43 +87,37 @@ void Object3D::collision_detect()
     if (displaceVec.xValue > limit)
     {
         velocityVec.xValue = -velocityVec.xValue*coefOfRest;
-        displaceVec.xValue = limit - 0.08;
-        previousDisplace.xValue = displaceVec.xValue;
+        displaceVec.xValue = limit;
         collidedWithWall = true;
     }
     if (displaceVec.yValue > limit)
     {
         velocityVec.yValue = -velocityVec.yValue*coefOfRest;
-        displaceVec.yValue = limit - 0.08;
-        previousDisplace.yValue = displaceVec.yValue;
+        displaceVec.yValue = limit;
         collidedWithWall = true;
     }
     if (displaceVec.zValue > limit)
     {
         velocityVec.zValue = -velocityVec.zValue*coefOfRest;
-        displaceVec.zValue = limit - 0.08;
-        previousDisplace.zValue = displaceVec.zValue;
+        displaceVec.zValue = limit;
         collidedWithWall = true;
     }
     if (displaceVec.xValue < -limit)
     {
         velocityVec.xValue = -velocityVec.xValue*coefOfRest;
-        displaceVec.xValue = -limit + 0.08;
-        previousDisplace.xValue = displaceVec.xValue;
+        displaceVec.xValue = -limit;
         collidedWithWall = true;
     }
     if (displaceVec.yValue < -limit)
     {
         velocityVec.yValue = -velocityVec.yValue*coefOfRest;
-        displaceVec.yValue = -limit + 0.08;
-        previousDisplace.yValue = displaceVec.yValue;
+        displaceVec.yValue = -limit;
         collidedWithWall = true;
     }
     if (displaceVec.zValue < -limit)
     {
         velocityVec.zValue = -velocityVec.zValue*coefOfRest;
-        displaceVec.zValue = -limit + 0.08;
-        previousDisplace.zValue = displaceVec.zValue;
+        displaceVec.zValue = -limit;
         collidedWithWall = true;
     }
 
