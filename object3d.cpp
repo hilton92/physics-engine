@@ -8,12 +8,12 @@
 void Object3D::update(double s)
 {
     calculate_velocity_sign_vector();
+    previousDisplace = displaceVec;
     dragForce = (velocitySignVector * -1) * ((velocityVec * velocityVec) * 0.5 * fluidDensity * dragCoefficient * area);
     accelVec = gravityVec + (dragForce * (1/objectMass));
     velocityVec = velocityVec + (accelVec * s);
     displaceVec = displaceVec + (velocityVec * s);
     collision_detect();
-    previousDisplace = displaceVec;
 }
 
 void Object3D::set_fluid_density(double density)

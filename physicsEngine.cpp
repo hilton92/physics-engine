@@ -128,15 +128,6 @@ void PhysicsEngine::collision_occurred(unsigned int s1, unsigned int s2)
 
 void PhysicsEngine::move_to_avoid_intersection(unsigned int s1, unsigned int s2)
 {
-    /*double radiusSum = ObjList[s1].objectRadius + ObjList[s2].objectRadius;
-    if (norm_mag(ObjList[s1].displaceVec) > norm_mag(ObjList[s2].displaceVec))
-    {
-        ObjList[s2].displaceVec = ObjList[s1].displaceVec + (ObjList[s2].get_velocity_unit_vector() * radiusSum);
-    }
-    else
-    {
-        ObjList[s1].displaceVec = ObjList[s2].displaceVec + (ObjList[s1].get_velocity_unit_vector() * radiusSum);
-    }*/
     ObjList[s1].displaceVec = ObjList[s1].previousDisplace;
     ObjList[s2].displaceVec = ObjList[s2].previousDisplace;
 }
