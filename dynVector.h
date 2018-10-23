@@ -53,9 +53,9 @@ public:
     dynVector operator / (double scalar)
     {
         dynVector vec;
-        vec.xValue = scalar / (this->xValue);
-        vec.yValue = scalar / (this->yValue);
-        vec.zValue = scalar / (this->zValue);
+        vec.xValue = (this->xValue) / scalar;
+        vec.yValue = (this->yValue) / scalar;
+        vec.zValue = (this->zValue) / scalar;
         return vec;
     }
 
