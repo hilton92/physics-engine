@@ -115,3 +115,39 @@ TEST(twoVectors, calculateDotProduct_returnsDotProduct)
     EXPECT_DOUBLE_EQ(dotProduct, 14.6);
 }
 
+TEST(engineWithObjects, clearEngine_returnsSizeZero)
+{
+    PhysicsEngine engine;
+    engine.add_sphere(1, 1, 0.8, 1.2, 2.4, 4.1, -1.1, 2.1, -0.4);
+    engine.add_sphere(1, 1, 2.1, 1.2, 2.4, 4.1, -1.1, 2.1, -0.4);
+    engine.add_sphere(1, 1, 1.5, 1.2, 2.4, 4.1, -1.1, 2.1, -0.4);
+    engine.clear();
+    EXPECT_EQ(engine.ObjList.size(), 0);
+    engine.add_sphere(1, 1, 2.1, 1.2, 2.4, 4.1, -1.1, 2.1, -0.4);
+    engine.add_sphere(1, 1, 1.5, 1.2, 2.4, 4.1, -1.1, 2.1, -0.4);
+    EXPECT_EQ(engine.ObjList.size(), 2);
+}
+
+TEST(objectWithVelocity, requestUnitVector_returnsCorrectUnitVector)
+{
+    PhysicsEngine engine;
+    engine.add_sphere(1, 1, 0.8, 1.2, 2.4, 4.1, -1.1, 2.1, -0.4);
+    dynVector unitVec = engine.ObjList[0].get_velocity_unit_vector();
+    dynVector trueVal{-0.457, 0.8735, -0.1664};
+    EXPECT_NEAR(unitVec.xValue, trueVal.xValue, 0.001);
+    EXPECT_NEAR(unitVec.yValue, trueVal.yValue, 0.001);
+    EXPECT_NEAR(unitVec.zValue, trueVal.zValue, 0.001);
+}
+
+TEST(twoObjectsWithOppositeVelocity, collisionOccurrs_spheresBounce)
+{
+    PhysicsEngine engine;
+    engine.add_sphere(1, 1, 0.8, 2.0, 0, 0, -2.0, 0, 0);
+    engine.add_sphere(1, 1, 0.8, -2.0, 0, 0, 2.0, 0, 0);
+    for (int i = 0; i < 40; i++)
+    {
+        engine.update(1.0 / 30);
+    }
+    EXPECT_NEAR(engine.ObjList[0].velocityVec.xValue, 0.445, 0.01);
+}
+

@@ -37,6 +37,7 @@ void PhysicsEngine::add_sphere(double radius, double mass, double coefficientOfR
     object.set_coefficient_of_restitution(coefficientOfRestitution);
     ObjList.push_back(object);
 }
+
 void PhysicsEngine::update(double s)
 {
     for (unsigned int i = 0; i < ObjList.size(); i++)
@@ -110,7 +111,6 @@ bool PhysicsEngine::check_if_proposed_sphere_interferes(double radius, double xP
     if (radiusSum < distance) return false;
     else return true;
 }
-
 
 void PhysicsEngine::collision_occurred(unsigned int s1, unsigned int s2)
 {

@@ -77,40 +77,48 @@ void Object3D::calculate_velocity_sign_vector()
 dynVector Object3D::get_velocity_unit_vector()
 {
     double norm = sqrt(norm_mag(velocityVec));
-    return velocityVec * (1/norm);
+    return velocityVec * (1.0/norm);
 }
 
 void Object3D::collision_detect()
 {
     double limit = 5 - objectRadius;
+    collidedWithWall = false;
     if (displaceVec.xValue > limit)
     {
         velocityVec.xValue = -velocityVec.xValue*coefOfRest;
         displaceVec.xValue = limit;
+        collidedWithWall = true;
     }
     if (displaceVec.yValue > limit)
     {
         velocityVec.yValue = -velocityVec.yValue*coefOfRest;
         displaceVec.yValue = limit;
+        collidedWithWall = true;
     }
     if (displaceVec.zValue > limit)
     {
         velocityVec.zValue = -velocityVec.zValue*coefOfRest;
         displaceVec.zValue = limit;
+        collidedWithWall = true;
     }
     if (displaceVec.xValue < -limit)
     {
         velocityVec.xValue = -velocityVec.xValue*coefOfRest;
         displaceVec.xValue = -limit;
+        collidedWithWall = true;
     }
     if (displaceVec.yValue < -limit)
     {
         velocityVec.yValue = -velocityVec.yValue*coefOfRest;
         displaceVec.yValue = -limit;
+        collidedWithWall = true;
     }
     if (displaceVec.zValue < -limit)
     {
         velocityVec.zValue = -velocityVec.zValue*coefOfRest;
         displaceVec.zValue = -limit;
+        collidedWithWall = true;
     }
+
 }

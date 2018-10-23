@@ -16,7 +16,7 @@ class PhysicsEngine
 public:
     PhysicsEngine() :
         gravityVec{0, 0, -9.8}, fluidDensity{1.275}{}
-    ~PhysicsEngine(){}
+    ~PhysicsEngine(){clear();}
     dynVector gravityVec;
     double fluidDensity;
     std::vector<Object3D> ObjList;
