@@ -74,6 +74,12 @@ void Object3D::calculate_velocity_sign_vector()
     if (velocityVec.zValue <0) velocitySignVector.zValue = -1;
 }
 
+dynVector Object3D::get_velocity_unit_vector()
+{
+    double norm = sqrt(norm_mag(velocityVec));
+    return velocityVec * (1/norm);
+}
+
 void Object3D::collision_detect()
 {
     double limit = 5 - objectRadius;

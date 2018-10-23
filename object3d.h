@@ -46,6 +46,7 @@ public:
     void calculate_velocity_sign_vector();
     void update(double s);
     void collision_detect();
+    dynVector get_velocity_unit_vector();
 };
 
 #endif
