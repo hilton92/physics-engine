@@ -1,4 +1,5 @@
 // Author: Benjamin Hilton
+// Date: October 2018
 
 #include <gtest/gtest.h>
 #include "physicsEngine.h"
@@ -10,6 +11,7 @@
 TEST(oneVector, populate_returnsCorrectValues)
 {
     dynVector vec1;
+
     vec1.set_values(2.1, 4, 1.3);
     EXPECT_EQ(vec1.xValue, 2.1);
     EXPECT_EQ(vec1.yValue, 4);
@@ -139,15 +141,55 @@ TEST(objectWithVelocity, requestUnitVector_returnsCorrectUnitVector)
     EXPECT_NEAR(unitVec.zValue, trueVal.zValue, 0.001);
 }
 
-TEST(twoObjectsWithOppositeVelocity, collisionOccurrs_spheresBounce)
+TEST(sphereWithVelocity, collisionWithWallOccurs_sphereBounces)
 {
     PhysicsEngine engine;
-    engine.add_sphere(1, 1, 0.8, 2.0, 0, 0, -2.0, 0, 0);
-    engine.add_sphere(1, 1, 0.8, -2.0, 0, 0, 2.0, 0, 0);
-    for (int i = 0; i < 40; i++)
+    engine.add_sphere(1, 1, 0.8, 3.5, 0, 0, 6.0, 0, 0);
+    engine.ObjList[0].includeDrag = false;
+    for (int i{0}; i < 10; i++)
     {
         engine.update(1.0 / 30);
     }
-    EXPECT_NEAR(engine.ObjList[0].velocityVec.xValue, 0.445, 0.01);
+    EXPECT_NEAR(engine.ObjList[0].velocityVec.xValue, -4.8, 0.01);
+}
+
+TEST(collisionAlgorithm, suppliedValues_calculatesCollision)
+{
+    PhysicsEngine engine;
+    engine.add_sphere(1, 1, 1, 1.0, 0, 0, -2.0, 0, 0);
+    engine.add_sphere(1, 1, 1, -1.0, 0, 0, 2.0, 0, 0);
+    engine.collision_occurred(0,1);
+    EXPECT_NEAR(engine.ObjList[0].velocityVec.xValue, 2, 0.01);
+    EXPECT_NEAR(engine.ObjList[1].velocityVec.xValue, -2, 0.01);
+}
+
+TEST(collisionAlgorithm3D, suppliedValues_calculatesCollision)
+{
+    PhysicsEngine engine;
+    engine.add_sphere(1, 1, 0.8, 1.0, 1.0, 1.0, -2.0, -2.0, -2.0);
+    engine.add_sphere(1, 1, 0.8, -1.0, -1.0, -1.0, 2.0, 2.0, 2.0);
+    engine.collision_occurred(0,1);
+    EXPECT_NEAR(engine.ObjList[0].velocityVec.xValue, 2*0.8, 0.01);
+    EXPECT_NEAR(engine.ObjList[1].velocityVec.xValue, -2*0.8, 0.01);
+    EXPECT_NEAR(engine.ObjList[0].velocityVec.yValue, 2*0.8, 0.01);
+    EXPECT_NEAR(engine.ObjList[1].velocityVec.yValue, -2*0.8, 0.01);
+    EXPECT_NEAR(engine.ObjList[0].velocityVec.zValue, 2*0.8, 0.01);
+    EXPECT_NEAR(engine.ObjList[1].velocityVec.zValue, -2*0.8, 0.01);
+}
+
+
+TEST(twoObjectsWithOppositeVelocity, collisionOccurrs_spheresBounce)
+{
+    PhysicsEngine engine;
+    engine.add_sphere(1, 1, 0.8, 1.5, 0, 0, -2.0, 0, 0);
+    engine.add_sphere(1, 1, 0.8, -1.5, 0, 0, 2.0, 0, 0);
+    engine.ObjList[0].includeDrag = false;
+    engine.ObjList[1].includeDrag = false;
+    for (int i = 0; i < 16; i++)
+    {
+        engine.update(1.0 / 30);
+    }
+    EXPECT_NEAR(engine.ObjList[0].velocityVec.xValue, (2.0*0.8), 0.01);
+    EXPECT_NEAR(engine.ObjList[1].velocityVec.xValue, (-2.0*0.8), 0.01);
 }
 

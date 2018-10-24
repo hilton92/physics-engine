@@ -1,5 +1,4 @@
 // Author: Benjamin Hilton
-// October 2018
 
 #include "physicsEngine.h"
 #include "object3d.h"
@@ -9,7 +8,11 @@ void Object3D::update(double s)
 {
     calculate_velocity_sign_vector();
     previousDisplace = displaceVec;
-    dragForce = (velocitySignVector * -1) * ((velocityVec * velocityVec) * 0.5 * fluidDensity * dragCoefficient * area);
+    if (includeDrag)
+    {
+        dragForce = (velocitySignVector * -1) * ((velocityVec * velocityVec) * 0.5 * fluidDensity * dragCoefficient * area);
+    }
+    else dragForce.set_values(0, 0, 0);
     accelVec = gravityVec + (dragForce * (1/objectMass));
     velocityVec = velocityVec + (accelVec * s);
     displaceVec = displaceVec + (velocityVec * s);
@@ -25,6 +28,7 @@ void Object3D::set_mass(double mass)
 {
     objectMass = mass;
 }
+
 void Object3D::set_radius(double radius)
 {
     objectRadius = radius;
@@ -83,42 +87,35 @@ dynVector Object3D::get_velocity_unit_vector()
 void Object3D::collision_detect()
 {
     double limit = 5 - objectRadius;
-    collidedWithWall = false;
     if (displaceVec.xValue > limit)
     {
         velocityVec.xValue = -velocityVec.xValue*coefOfRest;
         displaceVec.xValue = limit;
-        collidedWithWall = true;
     }
     if (displaceVec.yValue > limit)
     {
         velocityVec.yValue = -velocityVec.yValue*coefOfRest;
         displaceVec.yValue = limit;
-        collidedWithWall = true;
     }
     if (displaceVec.zValue > limit)
     {
         velocityVec.zValue = -velocityVec.zValue*coefOfRest;
         displaceVec.zValue = limit;
-        collidedWithWall = true;
     }
     if (displaceVec.xValue < -limit)
     {
         velocityVec.xValue = -velocityVec.xValue*coefOfRest;
         displaceVec.xValue = -limit;
-        collidedWithWall = true;
     }
     if (displaceVec.yValue < -limit)
     {
         velocityVec.yValue = -velocityVec.yValue*coefOfRest;
         displaceVec.yValue = -limit;
-        collidedWithWall = true;
     }
     if (displaceVec.zValue < -limit)
     {
         velocityVec.zValue = -velocityVec.zValue*coefOfRest;
         displaceVec.zValue = -limit;
-        collidedWithWall = true;
     }
 
 }

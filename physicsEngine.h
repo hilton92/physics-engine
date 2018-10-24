@@ -1,6 +1,4 @@
 // Author: Benjamin Hilton
-// Date: October 2018
-
 
 #ifndef PHYSICSENGINE_H_
 #define PHYSICSENGINE_H_
@@ -31,7 +29,7 @@ public:
     void collision_check(unsigned int index);
     bool determine_if_collision_occurred(unsigned int sphereIndex1, unsigned int sphereIndex2);
     void collision_occurred(unsigned int sphereIndex1, unsigned int sphereIndex2);
-    void move_to_avoid_intersection(unsigned int sphereIndex1, unsigned int sphereIndex2);
+    void move_inner_sphere_to_avoid_intersection(unsigned int sphereIndex1, unsigned int sphereIndex2);
     bool check_if_proposed_sphere_interferes(double radius, double xPos, double yPos, double zPos, unsigned int sp);
 };
 

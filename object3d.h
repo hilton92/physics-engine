@@ -20,7 +20,7 @@ public:
         area{3.1415927},
         objectMass{1},
         fluidDensity{1.275},
-        collidedWithWall{false}{}
+        includeDrag{true}{}
 
     ~Object3D(){}
     dynVector accelVec;
@@ -36,7 +36,7 @@ public:
     double area;
     double objectMass;
     double fluidDensity;
-    bool collidedWithWall;
+    bool includeDrag;
     void set_velocity(double xDot, double yDot, double zDot);
     void set_displace(double X, double Y, double Z);
     void set_accel(double xAccel, double yAccel, double zAccel);

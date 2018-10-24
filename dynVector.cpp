@@ -1,6 +1,5 @@
 //Author: Benjamin Hilton
 
-
 #include "dynVector.h"
 
 dynVector::dynVector()
@@ -9,6 +8,7 @@ dynVector::dynVector()
     yValue = 0.0;
     zValue = 0.0;
 }
+
 dynVector::dynVector(double X, double Y, double Z)
 {
     xValue = X;

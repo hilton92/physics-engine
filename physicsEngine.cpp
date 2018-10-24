@@ -1,5 +1,4 @@
 // Author: Benjamin Hilton
-// Date: October 2018
 
 #include "physicsEngine.h"
 #include "object3d.h"
@@ -40,7 +39,7 @@ void PhysicsEngine::add_sphere(double radius, double mass, double coefficientOfR
 
 void PhysicsEngine::update(double s)
 {
-    for (unsigned int i = 0; i < ObjList.size(); i++)
+    for (unsigned int i{0}; i < ObjList.size(); i++)
     {
         ObjList[i].update(s);
         collision_check(i);
@@ -49,7 +48,7 @@ void PhysicsEngine::update(double s)
 
 void PhysicsEngine::set_new_gravity()
 {
-    for (unsigned int i = 0; i < ObjList.size(); i++)
+    for (unsigned int i{0}; i < ObjList.size(); i++)
     {
         ObjList[i].gravityVec = gravityVec;
     }
@@ -57,7 +56,7 @@ void PhysicsEngine::set_new_gravity()
 
 void PhysicsEngine::set_new_fluid_density()
 {
-    for (unsigned int i = 0; i < ObjList.size(); i++)
+    for (unsigned int i{0}; i < ObjList.size(); i++)
     {
         ObjList[i].fluidDensity = fluidDensity;
     }
@@ -71,7 +70,7 @@ void PhysicsEngine::clear()
 void PhysicsEngine::collision_check(unsigned int index)
 {
     unsigned long int size = ObjList.size();
-    for (unsigned int i = 0; i < size; i++)
+    for (unsigned int i{0}; i < size; i++)
     {
         if (i != index)
         {
@@ -114,23 +113,22 @@ bool PhysicsEngine::check_if_proposed_sphere_interferes(double radius, double xP
 
 void PhysicsEngine::collision_occurred(unsigned int s1, unsigned int s2)
 {
-    dynVector v1 = ObjList[s1].velocityVec;
-    dynVector v2 = ObjList[s2].velocityVec;
+    dynVector v1{ObjList[s1].velocityVec};
+    dynVector v2{ObjList[s2].velocityVec};
     double massProduct1 = (-2 * ObjList[s2].objectMass) / (ObjList[s1].objectMass + ObjList[s2].objectMass);
     double massProduct2 = (-2 * ObjList[s1].objectMass) / (ObjList[s1].objectMass + ObjList[s2].objectMass);
     double dotProduct1 = ((v1 - v2) || (ObjList[s1].displaceVec - ObjList[s2].displaceVec));
     double dotProduct2 = ((v2 - v1) || (ObjList[s2].displaceVec - ObjList[s1].displaceVec));
     double norm = norm_mag(ObjList[s1].displaceVec - ObjList[s2].displaceVec);
-    ObjList[s1].velocityVec = ((ObjList[s1].displaceVec - ObjList[s2].displaceVec) * massProduct1 * (dotProduct1) * (1/norm) + v1) * ObjList[s1].coefOfRest;
-    ObjList[s2].velocityVec = ((ObjList[s2].displaceVec - ObjList[s1].displaceVec) * massProduct2 * (dotProduct2) * (1/norm) + v2) * ObjList[s2].coefOfRest;
-    move_to_avoid_intersection(s1, s2);
+    ObjList[s1].velocityVec = ((ObjList[s1].displaceVec - ObjList[s2].displaceVec) * massProduct1 * (dotProduct1) * (1.0/norm) + v1) * ObjList[s1].coefOfRest;
+    ObjList[s2].velocityVec = ((ObjList[s2].displaceVec - ObjList[s1].displaceVec) * massProduct2 * (dotProduct2) * (1.0/norm) + v2) * ObjList[s2].coefOfRest;
+    move_inner_sphere_to_avoid_intersection(s1, s2);
 }
 
-void PhysicsEngine::move_to_avoid_intersection(unsigned int s1, unsigned int s2)
+void PhysicsEngine::move_inner_sphere_to_avoid_intersection(unsigned int s1, unsigned int s2)
 {
     if (norm_mag(ObjList[s1].displaceVec) > norm_mag(ObjList[s2].displaceVec))
     {
-        //move s2
         double radiusSum = ObjList[s1].objectRadius + ObjList[s2].objectRadius;
         dynVector diff = ObjList[s2].displaceVec - ObjList[s1].displaceVec;
         double norm = sqrt(norm_mag(diff));
@@ -139,13 +137,10 @@ void PhysicsEngine::move_to_avoid_intersection(unsigned int s1, unsigned int s2)
     }
     else
     {
-        //move s1
         double radiusSum = ObjList[s1].objectRadius + ObjList[s2].objectRadius;
         dynVector diff = ObjList[s1].displaceVec - ObjList[s2].displaceVec;
         double norm = sqrt(norm_mag(diff));
         dynVector unitVec = diff / norm;
         ObjList[s1].displaceVec = ObjList[s2].displaceVec + (unitVec * radiusSum);
     }
-    //ObjList[s1].displaceVec = ObjList[s1].previousDisplace;
-    //ObjList[s2].displaceVec = ObjList[s2].previousDisplace;
 }
