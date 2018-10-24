@@ -3,11 +3,9 @@
 #ifndef PHYSICSENGINE_H_
 #define PHYSICSENGINE_H_
 
-
 #include "dynVector.h"
 #include "object3d.h"
 #include <vector>
-
 
 class PhysicsEngine  
 {

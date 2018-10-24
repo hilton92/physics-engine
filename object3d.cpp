@@ -86,7 +86,7 @@ dynVector Object3D::get_velocity_unit_vector()
 
 void Object3D::collision_detect()
 {
-    double limit = 5 - objectRadius;
+    double limit{5 - objectRadius};
     if (displaceVec.xValue > limit)
     {
         velocityVec.xValue = -velocityVec.xValue*coefOfRest;
@@ -117,5 +117,4 @@ void Object3D::collision_detect()
         velocityVec.zValue = -velocityVec.zValue*coefOfRest;
         displaceVec.zValue = -limit;
     }
-
 }

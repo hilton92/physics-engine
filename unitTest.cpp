@@ -1,5 +1,4 @@
 // Author: Benjamin Hilton
-// Date: October 2018
 
 #include <gtest/gtest.h>
 #include "physicsEngine.h"
@@ -11,7 +10,6 @@
 TEST(oneVector, populate_returnsCorrectValues)
 {
     dynVector vec1;
-
     vec1.set_values(2.1, 4, 1.3);
     EXPECT_EQ(vec1.xValue, 2.1);
     EXPECT_EQ(vec1.yValue, 4);
@@ -43,7 +41,6 @@ TEST(oneVector, multiplyByScalar_returnsCorrectAnswer)
 }
 
 //Unit Tests for Physics Engine
-
 
 TEST(defaultPhysics, givenUpdateTime_returnsDisplacement)
 {
